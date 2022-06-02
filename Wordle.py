@@ -20,7 +20,7 @@ words_list = []
 for x in words:
     words_list.append(x.strip())
 random_word = random.choice(words_list)
-print(random_word)
+#print(random_word)
 for i in range(1,7):
     ip = input("\nEnter a five letter word:")
     ip = ip.lower()
