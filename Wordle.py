@@ -1,3 +1,5 @@
+import random
+
 def isword(user_word,wordly_word):
     for x in user_word:
         print(x,end="  ")
@@ -14,50 +16,24 @@ def isword(user_word,wordly_word):
     else:
         return 0
 
-import random
-words = open('words.txt')
-words_list = []
-for x in words:
-    words_list.append(x.strip())
-random_word = random.choice(words_list)
+with open('words.txt') as f:
+    lines = f.readlines()
+    words = [line.strip() for line in lines]
+random_word = random.choice(words)
 #print(random_word)
-for i in range(1,7):
-    ip = input("\nEnter a five letter word:")
-    ip = ip.lower()
-    word = ip[0:5]
-    if i==1:
-        if isword(word,random_word):
-            print("\nGenius")
-            break
-        else:
-            continue
-    elif i==2:
-        if isword(word,random_word):
-            print("\nMagnificent")
-            break
-        else:
-            continue
-    elif i==3:
-        if isword(word,random_word):
-            print("\nImpressive")
-            break
-        else:
-            continue
-    elif i==4:
-        if isword(word,random_word):
-            print("\nSplendid")
-            break
-        else:
-            continue
-    elif i==5:
-        if isword(word,random_word):
-            print("\nGreat")
-            break
+print("Let's Play Wordle")
+message,i  = {5:"Marvelluos",4:"Excellent",3:"Very good",2:"Nice",1:"Good",0:"Ok"},6
+while i>0:
+    user_word=input("\nEnter word: ")
+    user_word = user_word.lower()
+    if (len(user_word)==5 and user_word.isalpha()):
+        i = i-1
+        if isword(user_word,random_word):
+                print("\n",message[i])
+                break
         else:
             continue
     else:
-        if isword(word,random_word):
-            print("\nPhew")
-            break
+        print("Please enter a valid word")
 else:
-    print("End of Game, the correct word is:",random_word)
+    print("Game over")
